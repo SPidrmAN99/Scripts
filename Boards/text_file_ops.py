@@ -1,3 +1,4 @@
+#Read a text file and write all the lines containing letter 'a' to another file
 file1 = open("file1.txt", "w")
 file1.write("Hello, World!\n")
 file1.write("My name is Varun\n")

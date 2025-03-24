@@ -1,3 +1,4 @@
+#Create a binary file with name and roll number of students and search for a student by roll number
 import pickle, os
 os.system("cls")
 file1 = open("Student_record.dat", "wb")
