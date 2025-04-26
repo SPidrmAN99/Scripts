@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+</head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirm_password");
+    const message = document.getElementById("password_message");
+
+    function validatePassword() {
+        const pwd = password.value;
+        const confirmPwd = confirmPassword.value;
+        let errors = [];
+
+        if (pwd.length < 8 || pwd.length > 16)
+            errors.push("Password must be 8–16 characters.");
+        if (!/[a-z]/.test(pwd))
+            errors.push("Include a lowercase letter.");
+        if (!/[A-Z]/.test(pwd))
+            errors.push("Include an uppercase letter.");
+        if (!/[0-9]/.test(pwd))
+            errors.push("Include a digit.");
+        if (!/[!@#$%^&*(),.?\":{}|<>]/.test(pwd))
+            errors.push("Include a special character.");
+
+        if (pwd !== confirmPwd)
+            errors.push("Passwords do not match.");
+
+        message.innerHTML = errors.length ? errors.join("<br>") : "<span style='color:green;'>✅ Password looks good!</span>";
+    }
+
+    password.addEventListener("input", validatePassword);
+    confirmPassword.addEventListener("input", validatePassword);
+});
+</script>
+    
+<body>
+    <h2>Create Account Form</h2>
+    <form name="myForm" action="/login" method="post" onsubmit="return validateForm()">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br><br>
+
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+
+        <label for="password">Confirm Password:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password"><br><br>
+
+        <script>
+        function validateForm() {
+            var password = document.forms["myForm"]["password"].value;
+            var confirmPassword = document.forms["myForm"]["confirm_password"].value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return false;
+            }
+            return true;
+        }
+        </script>
+            
+
+        <label for="key">Key Number:</label><br>
+        <select id="key_number" name="key_number">
+            <option value="option1">1</option>
+            <option value="option2">2</option>
+            <option value="option3">3</option>
+            <option value="option4">4</option>
+            <option value="option5">5</option>
+            <option value="option6">6</option>
+            <option value="option7">7</option>
+            <option value="option8">8</option>
+            <option value="option9">9</option>
+            <option value="option10">10</option>
+          </select>
+
+        <input type="submit" value="Create Account">
+    </form>
+</body>
+</html>
