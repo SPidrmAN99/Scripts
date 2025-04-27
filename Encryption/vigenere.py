@@ -1,5 +1,5 @@
 # Define Samplespace with space and 94 characters (indices 1 to 94)
-Samplespace = ' abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{}|;:,.<>? '
+Samplespace = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{}|;:,.<>?'
 Samplespace_index = dict(zip(Samplespace, range(1, len(Samplespace))))
 index_to_Samplespace = dict(zip(range(1, len(Samplespace)), Samplespace))
 
