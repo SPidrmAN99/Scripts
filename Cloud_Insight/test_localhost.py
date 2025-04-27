@@ -11,17 +11,17 @@ Samplespace_index = dict(zip(Samplespace, range(1, len(Samplespace))))
 index_to_Samplespace = dict(zip(range(1, len(Samplespace)), Samplespace))
 key_list = [5039, 3812, 3166, 4926, 3874, 4619, 1637, 7252, 4348, 3240]
 
-CSV_FILE = 'users.csv'
+# Absolute file path for the CSV file
+CSV_FILE = r'C:\Personal\Varun\Board\Computer_Science\Programs\Scripts\Cloud_Insight\users.csv'
 
 # Create the CSV file if it does not exist
 if not os.path.exists(CSV_FILE):
     try:
-        with open('users.csv', mode='a', newline='') as file:
+        with open(CSV_FILE, mode='a', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(['Username', 'EncryptedPassword'])  # Header
     except PermissionError:
         print("Bruh. Permission denied. Fix the file or close Excel.")
-
 
 # --- Password validation ---
 def validate_password(password):
@@ -84,15 +84,16 @@ def home():
             writer = csv.writer(file)
             writer.writerow([final_username, encrypted_password])
 
-        # Redirect to success page
-        return redirect(url_for('account_created', username=final_username))
+        # Redirect to success page with both username and key_number
+        return redirect(url_for('account_created', username=final_username, key_number=key_number))
 
     return render_form()
 
 @app.route('/account_created')
 def account_created():
     username = request.args.get('username')
-    return render_template('account_created.html', username=username)
+    key_number = request.args.get('key_number')  # Add this line to get the key_number
+    return render_template('account_created.html', username=username, key_number=key_number)
 
 # --- Helper Functions ---
 def render_form():
