@@ -1,6 +1,43 @@
-<!-- templates/account_created.html -->
-<h2>Account Created Successfully!</h2>
-<p>Username: <strong>{{ username }}</strong></p>
-<p>Key number: <strong>{{ key_number }}</strong></p>
-<p>Remember that your username is different from the one you entered in the dialogue box, please Remember the one we provided you</p>
-<p>Remember your Key Number; we do not store it for your safety. 🔒</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Created - Cloud Insight</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for better aesthetics */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+        /* Orange Business color palette - ONLY standard CSS properties here */
+        .bg-orange-business-dark { background-color: #FF7900; }
+        .bg-orange-business-light { background-color: #FFB366; }
+        .text-orange-business { color: #FF7900; }
+        .border-orange-business { border-color: #FF7900; }
+        /* Removed .focus-ring-orange-business and .ring-offset-orange-business from custom CSS */
+        .bg-gray-business-dark { background-color: #333333; }
+        .text-gray-business { color: #333333; }
+        .hover-bg-orange-business:hover { background-color: #E66A00; }
+        .hover-text-orange-business:hover { color: #E66A00; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-orange-business-light to-orange-business-dark flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center border-t-4 border-orange-business">
+        <h2 class="text-3xl font-extrabold mb-6 text-orange-business">Account Created Successfully! 🎉</h2>
+        <p class="text-gray-700 text-lg mb-3">Your new username is: <br><strong class="font-bold text-gray-business text-xl">{{ username }}</strong></p>
+        <p class="text-gray-600 text-sm italic mb-8">Please note down your username. It's different from the one you entered!</p>
+        <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center">
+            <a href="/"
+               class="inline-block bg-orange-business-dark hover-bg-orange-business text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-business">
+                Create another account
+            </a>
+            <a href="/login"
+               class="inline-block bg-gray-business-dark hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-business">
+                Sign In
+            </a>
+        </div>
+    </div>
+</body>
+</html>

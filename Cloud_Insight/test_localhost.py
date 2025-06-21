@@ -102,7 +102,7 @@ def render_form():
         <form method="POST">
             <label>Username:</label><br>
             <input type="text" name="username" required><br><br>
-            <label>Password:</label><br>
+            <label>Password: (Password must be 8–16 characters, containing at least one uppercase letter, one lowercase letter, one digit, and one special character. )</label><br>
             <input type="password" name="password" required><br><br>
             <label>Confirm Password:</label><br>
             <input type="password" name="confirm_password" required><br><br>
@@ -123,7 +123,7 @@ def error_page(message):
         <form method="POST">
             <label>Username:</label><br>
             <input type="text" name="username" required><br><br>
-            <label>Password:</label><br>
+            <label>Password: (Password must be 8–16 characters, containing at least one uppercase letter, one lowercase letter, one digit, and one special character. )</label><br>
             <input type="password" name="password" required><br><br>
             <label>Confirm Password:</label><br>
             <input type="password" name="confirm_password" required><br><br>

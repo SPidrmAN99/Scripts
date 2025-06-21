@@ -3,25 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <form method="POST">
-        <h2>Sign In</h2>
-        Username: <input type="text" name="username" required /><br><br>
-        Password: <input type="password" name="password" required /><br><br>
-        Key Number: <select name="key_number" required>
-            <option value="">--Select--</option>
-            {% for i in range(1, 11) %}
-                <option value="{{ i }}">{{ i }}</option>
-            {% endfor %}
-        </select><br><br>
-        <input type="submit" value="Sign In" />
-    </form>
+    <title>Login - Cloud Insight</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for better aesthetics */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+        /* Orange Business color palette - ONLY standard CSS properties here */
+        .bg-orange-business-dark { background-color: #FF7900; }
+        .bg-orange-business-light { background-color: #FFB366; }
+        .text-orange-business { color: #FF7900; }
+        .border-orange-business { border-color: #FF7900; }
+        /* Removed .focus-ring-orange-business and .ring-offset-orange-business from custom CSS */
+        .bg-gray-business-dark { background-color: #333333; }
+        .text-gray-business { color: #333333; }
+        .hover-bg-orange-business:hover { background-color: #E66A00; }
+        .hover-text-orange-business:hover { color: #E66A00; }
 
-    <!-- Display the message dynamically -->
-    {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
+        .message-error {
+            color: #ef4444; /* red-500 */
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .message-success {
+            color: #22c55e; /* green-500 */
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-orange-business-light to-orange-business-dark flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border-t-4 border-orange-business">
+        <h2 class="text-3xl font-extrabold mb-7 text-center text-gray-business">Sign In</h2>
+        <form method="POST" action="/login" class="space-y-6">
+            <div>
+                <label for="username" class="block text-sm font-semibold text-gray-700 mb-1">Username:</label>
+                <input type="text" id="username" name="username" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-business focus:border-orange-business text-gray-900 placeholder-gray-400"
+                       placeholder="Your username">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-semibold text-gray-700 mb-1">Password:</label>
+                <input type="password" id="password" name="password" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-business focus:border-orange-business text-gray-900 placeholder-gray-400"
+                       placeholder="Your password">
+            </div>
+            <button type="submit"
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-bold text-white bg-orange-business-dark hover-bg-orange-business focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-business transform transition-transform duration-150 ease-in-out hover:scale-105">
+                Sign In
+            </button>
+            <p class="mt-4 text-center text-sm text-gray-600">
+                Don't have an account? <a href="/" class="font-medium text-orange-business hover-text-orange-business">Create Account</a>
+            </p>
+        </form>
+
+        <!-- Display the message dynamically -->
+        {% if message %}
+            <p class="{% if 'Successful' in message %}message-success{% else %}message-error{% endif %}">
+                {{ message }}
+            </p>
+        {% endif %}
+    </div>
 </body>
 </html>

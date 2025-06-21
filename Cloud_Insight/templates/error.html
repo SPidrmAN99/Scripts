@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Cloud Insight</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for better aesthetics */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+        /* Orange Business color palette - ONLY standard CSS properties here */
+        .bg-orange-business-dark { background-color: #FF7900; }
+        .bg-orange-business-light { background-color: #FFB366; }
+        .text-orange-business { color: #FF7900; }
+        .border-orange-business { border-color: #FF7900; }
+        /* Removed .focus-ring-orange-business and .ring-offset-orange-business from custom CSS */
+        .bg-gray-business-dark { background-color: #333333; }
+        .text-gray-business { color: #333333; }
+        .hover-bg-orange-business:hover { background-color: #E66A00; }
+        .hover-text-orange-business:hover { color: #E66A00; }
+
+        .password-message-error {
+            color: #ef4444; /* red-500 */
+            font-size: 0.875rem; /* text-sm */
+            margin-top: 0.25rem;
+        }
+        .password-message-success {
+            color: #22c55e; /* green-500 */
+            font-size: 0.875rem; /* text-sm */
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-orange-business-light to-orange-business-dark flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border-t-4 border-red-700">
+        <h2 class="text-3xl font-extrabold mb-6 text-center text-red-600">Account Creation Failed! 🚨</h2>
+        <p class="text-red-500 text-center text-lg mb-6 font-medium">{{ message }}</p>
+        
+        <!-- Re-display the form so the user can try again -->
+        <form method="POST" action="/" class="space-y-6" id="createAccountForm">
+            <div>
+                <label for="username" class="block text-sm font-semibold text-gray-700 mb-1">Username:</label>
+                <input type="text" id="username" name="username" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-business focus:border-orange-business text-gray-900 placeholder-gray-400"
+                       placeholder="Enter your desired username">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-semibold text-gray-700 mb-1">Password:</label>
+                <input type="password" id="password" name="password" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-business focus:border-orange-business text-gray-900 placeholder-gray-400"
+                       placeholder="Enter your password">
+                <p id="password_message" class="text-xs mt-2"></p> <!-- Message area for JS validation -->
+            </div>
+            <div>
+                <label for="confirm_password" class="block text-sm font-semibold text-gray-700 mb-1">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required
+                       class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-orange-business focus:border-orange-business text-gray-900 placeholder-gray-400"
+                       placeholder="Confirm your password">
+            </div>
+            <button type="submit"
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-md text-base font-bold text-white bg-orange-business-dark hover-bg-orange-business focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-business transform transition-transform duration-150 ease-in-out hover:scale-105">
+                Try Again
+            </button>
+            <p class="mt-4 text-center text-sm text-gray-600">
+                Already have an account? <a href="/login" class="font-medium text-orange-business hover-text-orange-business">Sign In</a>
+            </p>
+        </form>
+    </div>
+
+    <script>
+        // Client-side validation script (copy of index.html's script for consistency)
+        document.addEventListener("DOMContentLoaded", () => {
+            const passwordInput = document.getElementById("password");
+            const confirmPasswordInput = document.getElementById("confirm_password");
+            const passwordMessage = document.getElementById("password_message");
+            const form = document.getElementById("createAccountForm");
+
+            function validatePasswordFields() {
+                const pwd = passwordInput.value;
+                const confirmPwd = confirmPasswordInput.value;
+                let errors = [];
+
+                if (pwd.length < 8 || pwd.length > 16) {
+                    errors.push("Password must be 8–16 characters.");
+                }
+                if (!/[a-z]/.test(pwd)) {
+                    errors.push("Include at least one lowercase letter.");
+                }
+                if (!/[A-Z]/.test(pwd)) {
+                    errors.push("Include at least one uppercase letter.");
+                }
+                if (!/[0-9]/.test(pwd)) {
+                    errors.push("Include at least one digit.");
+                }
+                if (!/[!@#$%^&*(),.?\":{}|<>]/.test(pwd)) {
+                    errors.push("Include at least one special character.");
+                }
+
+                if (pwd !== confirmPwd && confirmPwd.value.length > 0) {
+                    errors.push("Passwords do not match.");
+                }
+
+                if (errors.length > 0) {
+                    passwordMessage.className = "password-message-error";
+                    passwordMessage.innerHTML = errors.join("<br>");
+                    return false;
+                } else {
+                    passwordMessage.className = "password-message-success";
+                    passwordMessage.innerHTML = "✅ Password looks good!";
+                    return true;
+                }
+            }
+
+            passwordInput.addEventListener("input", validatePasswordFields);
+            confirmPasswordInput.addEventListener("input", validatePasswordFields);
+            validatePasswordFields(); // Initial check
+        });
+    </script>
+</body>
+</html>
